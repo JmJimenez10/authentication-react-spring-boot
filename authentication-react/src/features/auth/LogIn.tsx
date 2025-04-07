@@ -52,8 +52,8 @@ export const LogIn = () => {
     };
 
     return <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-neutral-900  to-blue-950 text-neutral-100">
-        <div className="px-20 py-10 bg-neutral-800 rounded-lg shadow-lg">
-            <h1 className="text-4xl">Inicio de sesión</h1>
+        <div className="px-10 md:px-20 py-10 bg-neutral-800 rounded-lg shadow-lg">
+            <h1 className="text-center text-4xl">Inicio de sesión</h1>
 
             <div className="my-20 flex flex-col gap-5">
                 <form onSubmit={handleSubmit}>
@@ -84,6 +84,8 @@ export const LogIn = () => {
                         </div>
                     </div>
                 </form>
+
+                <Link to="/" className="text-blue-500 underline text-sm my-4">He olvidado la contraseña</Link>
             </div>
 
             <Link to="/" className="text-blue-500 underline text-sm">Volver a inicio</Link>

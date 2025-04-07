@@ -1,5 +1,5 @@
 import queryString from "query-string";
-import { ILoginResponse, ILoginUser, IRegisterUser } from "../types/User";
+import { ILoginResponse, ILoginUser, IRegisterUser, IUser } from "../types/User";
 import httpClient from "../utils/httpClient";
 
 const urlBase = "/users";
@@ -51,6 +51,25 @@ export const loadUser = async (userId: string) => {
   return await httpClient({
     url: `${urlBase}/admin/${userId}`,
     method: "GET",
+  });
+};
+
+// Actualizar datos de un usuario
+export const updateUser = async (user: IUser) => {
+  return await httpClient({
+    url: `${urlBase}/admin/update/${user.id}`,
+    method: "PUT",
+    data: user,
+  });
+};
+
+// Actualizar perfil del usuario autenticado
+export const updateMyProfile = async (userDTO: IUser, currentPassword: string) => {
+  return await httpClient<ILoginResponse>({
+    url: `${urlBase}/profile/update`,
+    method: "POST",
+    data: userDTO,
+    params: {currentPassword}
   });
 };
 

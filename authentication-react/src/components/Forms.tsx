@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { IoAlertCircleOutline, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
 interface InputProps {
-    label: string;
-    id: string;
+    label?: string;
+    id?: string;
     value: string;
     placeholder?: string;
     type?: string;
@@ -18,8 +19,8 @@ export const Input = ({ label, id, value, placeholder, type = 'text', onChange, 
     const inputType = isPassword ? (viewPassword ? 'text' : 'password') : type;
 
     return (
-        <div className="flex flex-col mb-4">
-            <label htmlFor={id}>{label}</label>
+        <div className={clsx("flex flex-col", label && "mb-4")}>
+            {label && <label htmlFor={id}>{label}</label>}
 
             <div className={`flex items-center w-full gap-3 ${isPassword ? '' : 'block'}`}>
                 <input
@@ -60,7 +61,7 @@ interface Option {
 interface SelectProps {
     label: string;
     id: string;
-    value: string;
+    value: string | number;
     options: Option[];
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     fieldErrors?: string;

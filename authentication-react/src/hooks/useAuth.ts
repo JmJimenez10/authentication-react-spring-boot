@@ -1,9 +1,9 @@
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { deleteUser, getMyProfile, loginUser, registerUser } from "../api/users.api";
+import { useNavigate } from "react-router-dom";
+import { getMyProfile, loginUser, registerUser, updateMyProfile } from "../api/users.api";
 import { userAtom } from "../atoms/user.atom";
 import { ILoginUser, IRegisterUser, IUser } from "../types/User";
-import { useNavigate } from "react-router-dom";
 import { setMessageError } from "../utils/utilsFunctions";
 
 const useAuth = () => {
@@ -81,7 +81,21 @@ const useAuth = () => {
     navigate("/");
   };
 
-  return { register, login, logout, getProfile, removeUser: deleteUser, loading, error, user };
+  const updateProfile = async (userData: IUser, currentPassword: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await updateMyProfile(userData, currentPassword);
+      saveUserToStorage(response.data.user, response.data.token);
+      return response;
+    } catch (err: unknown) {
+      setMessageError(err, setError);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { register, login, logout, getProfile, updateProfile, loading, error, user };
 };
 
 export default useAuth;

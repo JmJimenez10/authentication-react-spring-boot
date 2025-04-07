@@ -14,7 +14,7 @@ export const SignUp = () => {
         email: '',
         telephone: '',
         password: '',
-        role: Roles.USER
+        role: Roles.CUSTOMER
     });
     const [confirmPassword, setConfirmPassword] = useState('');
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -67,10 +67,10 @@ export const SignUp = () => {
     }
 
     return <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-neutral-900  to-blue-950 text-neutral-100">
-        <div className="px-20 py-10 bg-neutral-800 rounded-lg shadow-lg">
-            <h1 className="text-4xl">Nueva Cuenta</h1>
+        <div className="px-10 md:px-20 py-10 bg-neutral-800 rounded-lg shadow-lg">
+            <h1 className="text-center text-4xl">Nueva Cuenta</h1>
 
-            <div className="my-20 flex flex-col gap-5">
+            <div className="my-10 md:my-20 flex flex-col gap-5">
                 <form onSubmit={handleSubmit}>
                     <Input label="Nombre"
                         id="name"
